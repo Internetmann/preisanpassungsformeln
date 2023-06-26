@@ -55,53 +55,7 @@ if not error_message:
                                              marktelement * waermepreis_index / waermepreis_index_0 +
                                              Erdgas_Börse * gas_index2 / gas_index2_0)
 
-# Calculate the Arbeitspreis normalized to 100 in 02/2021
-arbeitspreis_normalized = arbeitspreis_neu * 100 / arbeitspreis_neu[dates == '2021-02-01'].values[0]
 
-# Create the plot
-fig = go.Figure()
-fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_normalized, name='Arbeitspreis (Normalized)', line=dict(color='blue', width=2)))
-
-# Configure the first y-axis (left)
-fig.update_layout(
-    yaxis=dict(
-        title='Normalized Value',
-        side='left'
-    )
-)
-
-# Assign the Arbeitspreis data to the second y-axis
-fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu, name='Arbeitspreis (Absolute)', line=dict(color='red', width=2), yaxis='y2'))
-
-# Configure the second y-axis (right)
-fig.update_layout(
-    yaxis2=dict(
-        title='Arbeitspreis in €/MWh',
-        side='right',
-        overlaying='y',
-        showgrid=False,
-        tickfont=dict(color='red'),  # Set the tick labels to red
-        range=[0, max(arbeitspreis_neu)]  # Set the range based on the maximum value of Arbeitspreis
-    )
-)
-
-# Update the plot layout
-fig.update_layout(
-    xaxis_title='Datum',
-    legend=dict(
-        x=0,
-        y=1,
-        bgcolor='rgba(255, 255, 255, 0.5)',
-        orientation='v'
-    ),
-    autosize=True,
-    margin=dict(l=20, r=20, t=60, b=20)
-)
-
-# Display the plot
-st.plotly_chart(fig, use_container_width=True)
-
-"""
     # Create the plot
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu / arbeitspreis_neu[0] * 100, name='Arbeitspreis', line=dict(color='red', width=2)))
@@ -136,8 +90,12 @@ st.plotly_chart(fig, use_container_width=True)
     )
 
     # Assign the scaled Arbeitspreis data to the second y-axis
-    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu_scaled * scale_factor, name='Arbeitspreis (€/MWh)', line=dict(color='red', width=2), yaxis='y2'))
+    #fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu_scaled * scale_factor, name='Arbeitspreis (€/MWh)', line=dict(color='red', width=2), yaxis='y2'))
 
+    # Hide the line for the Arbeitspreis (€/MWh) trace
+    fig.update_traces(selector=dict(name='Arbeitspreis (€/MWh)'), showlegend=False, line=dict(color='white'))
+
+    
     # Update the plot layout
     fig.update_layout(
         xaxis_title='Datum',
@@ -156,7 +114,7 @@ st.plotly_chart(fig, use_container_width=True)
         st.error(error_message)
     else:
         st.plotly_chart(fig, use_container_width=True)
-"""
+
 
 """    
     
