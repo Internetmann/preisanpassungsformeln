@@ -17,6 +17,12 @@ waermepreis_index = data['Wärmepreisindex']
 # Set up the layout
 st.title('Fernwärme Arbeitspreisanpassung')
 
+# Explanation text
+st.markdown("Testen Sie mit diesem Tool verschiedene Preisformeln und Ihre Auswirkungen auf den Arbeitspreis. Alle Indizes sind vom Statistischen Bundesamt, die Gewichtungen müssen zusammen 1 ergeben.")
+# Explanation text
+st.markdown("Der Wärmepreisindex ist ein idealtypischer Repräsentant für den Wärmemarkt und prädestiniert für das Marktelement. Die beiden Erdgasindizes repräsentieren Brennstoffkosten für Gas - (1) im deutschen Durchschnitt bei Abgabe an die Industrie, (2) anhand der Preise an der Energiebörse EEX.")
+
+
 # Input widgets
 col1, col2, col3, col4, col5 = st.columns(5)
 
@@ -53,7 +59,7 @@ if not error_message:
     # Create the plot
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu, name='Arbeitspreis', line=dict(color='red', width=2)))
-    fig.add_trace(go.Scatter(x=dates, y=waermepreis_index, name='Wärmepreisindex', line=dict(color='green', width=2)))
+    fig.add_trace(go.Scatter(x=dates, y=waermepreis_index, name='Wärmepreisindex', line=dict(color='orange', width=2)))
     fig.add_trace(go.Scatter(x=dates, y=gas_index, name='Erdgas, bei Abgabe an die Industrie', line=dict(color='lightblue', width=2)))
     fig.add_trace(go.Scatter(x=dates, y=gas_index2, name='Erdgas, Börsennotierungen', line=dict(color='blue', width=2)))
 
