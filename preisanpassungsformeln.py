@@ -21,19 +21,15 @@ st.title('Fernwärme Arbeitspreisanpassung')
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    #st.subheader('Fix-Element')
     fix_element = st.number_input('Fix-Element', min_value=0.0, max_value=1.0, step=0.01, value=0.2)
 
 with col2:
-    #st.subheader('Kostenelement')
     kostenelement = st.number_input('Kostenelement', min_value=0.0, max_value=1.0, step=0.01, value=0.4)
 
 with col3:
-    #st.subheader('Marktelement')
     marktelement = st.number_input('Marktelement', min_value=0.0, max_value=1.0, step=0.01, value=0.4)
 
 with col4:
-    #st.subheader('Basis-Arbeitspreis')
     basis_arbeitspreis = st.number_input('Basis-Arbeitspreis', min_value=20, max_value=200, step=1, value=50)
 
 # Ensure the elements sum up to 1
@@ -57,7 +53,6 @@ if not error_message:
 
     # Update the plot layout
     fig.update_layout(
-        title='Fernwärme Arbeitspreisanpassung',
         xaxis_title='Datum',
         yaxis_title='Preis',
         legend=dict(
