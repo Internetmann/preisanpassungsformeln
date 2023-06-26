@@ -76,6 +76,19 @@ if not error_message:
         margin=dict(l=20, r=20, t=60, b=20)
     )
 
+    # Add the second y-axis for Arbeitspreis in €/MWh
+    fig.update_layout(
+        yaxis2=dict(
+            title='Arbeitspreis in €/MWh',
+            overlaying='y',
+            side='right'
+        )
+    )
+
+    # Assign the Arbeitspreis data to the second y-axis
+    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu, name='Arbeitspreis', line=dict(color='red', width=2), yaxis='y2'))
+
+
 # Display the input parameters
 if error_message:
     st.error(error_message)
