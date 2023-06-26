@@ -52,7 +52,7 @@ else:
 
 # Create the plot if there is no error
 if not error_message:
-    # Calculate the normalized indices
+# Calculate the normalized indices
 gas_index_norm = gas_index / gas_index_0 * 100
 gas_index2_norm = gas_index2 / gas_index2_0 * 100
 waermepreis_index_norm = waermepreis_index / waermepreis_index_0 * 100
@@ -61,7 +61,7 @@ waermepreis_index_norm = waermepreis_index / waermepreis_index_0 * 100
 arbeitspreis_neu = basis_arbeitspreis * (fix_element +
                                          Erdgas_Industrie * gas_index / gas_index_0 +
                                          marktelement * waermepreis_index / waermepreis_index_0 +
-                                         Erdgas_Börse * gas_index2 / gas_index2_0)
+                                         Erdgas_Börse * gas_index2 / gas_index2_0) + 100 - basis_arbeitspreis
 
 # Determine the y-axis range for the normalized data
 y_min = min(min(gas_index_norm), min(gas_index2_norm), min(waermepreis_index_norm), min(arbeitspreis_neu))
