@@ -29,7 +29,6 @@ with col2:
 with col3:
     marktelement = st.number_input('Marktelement', min_value=0.0, max_value=1.0, step=0.01, value=0.4)
 
-col4.header('Kostenelement')
 with col4:
     Erdgas_Industrie = st.number_input('Erdgas, bei Abgabe an die Industrie', min_value=0.0, max_value=1.0, step=0.01, value=0.2)
 
