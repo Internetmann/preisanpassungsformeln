@@ -78,7 +78,10 @@ if not error_message:
     # Calculate the scale factor for the second y-axis
     scale_factor = max(arbeitspreis_neu)
 
-        # Configure the second y-axis (right)
+    # Calculate the range for the secondary y-axis
+    secondary_y_range = [min(arbeitspreis_neu) * normalization_factor, max(arbeitspreis_neu) * normalization_factor]
+
+    # Configure the second y-axis (right)
     fig.update_layout(
         yaxis2=dict(
             title='Arbeitspreis in €/MWh',
@@ -86,7 +89,7 @@ if not error_message:
             overlaying='y',
             showgrid=False,
             tickfont=dict(color='red'),  # Set the tick labels to red
-            range=[0, max(arbeitspreis_neu)],  # Set the range based on the absolute values of Arbeitspreis
+            range=secondary_y_range,  # Set the range based on the absolute values of Arbeitspreis
             ticksuffix=' €/MWh'  # Add the currency suffix to the tick labels
         )
     )
