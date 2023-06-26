@@ -35,7 +35,7 @@ with col4:
 # Ensure the elements sum up to 1
 total_elements = fix_element + kostenelement + marktelement
 if total_elements != 1:
-    error_message = f"Die Gewichtungen ergeben {total_elements:.2f} statt 1."
+    error_message = f"Vorsicht: Die Gewichtungen ergeben zusammen {total_elements:.2f} statt 1."
 else:
     error_message = ""
 
