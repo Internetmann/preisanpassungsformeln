@@ -76,7 +76,7 @@ if not error_message:
 
     # Calculate the scale factor for the second y-axis
     scale_factor = max(arbeitspreis_neu_scaled) / max(arbeitspreis_neu_scaled)  # Use the maximum value of Arbeitspreis
-
+"""
     # Configure the second y-axis (right)
     fig.update_layout(
         yaxis2=dict(
@@ -89,15 +89,21 @@ if not error_message:
             range=[0, max(arbeitspreis_neu)]
         )
     )
-
+"""
     # Assign the scaled Arbeitspreis data to the second y-axis
     #fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu_scaled * scale_factor, name='Arbeitspreis (€/MWh)', line=dict(color='red', width=2), yaxis='y2'))
 
-    # Hide the line for the Arbeitspreis (€/MWh) trace
-    # Hide the line for the Arbeitspreis (€/MWh) trace
-    fig.update_traces(selector=dict(name='Arbeitspreis'), showlegend=False, line=dict(color='white'))
+    # Create a duplicate y-axis for displaying the Arbeitspreis in €/MWh
+    fig.update_yaxes(
+        title='Arbeitspreis in €/MWh',
+        color='red',
+        showgrid=False,
+        secondary_y=True
+    )
 
-    
+    # Hide the line for the Arbeitspreis (€/MWh) trace
+    fig.update_traces(selector=dict(name='Arbeitspreis (Normalized)'), showlegend=False, line=dict(color='blue'))
+
     # Update the plot layout
     fig.update_layout(
         xaxis_title='Datum',
