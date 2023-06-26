@@ -67,11 +67,16 @@ if not error_message:
     # Add the dummy trace for the secondary y-axis
     fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu / arbeitspreis_neu[0] * 100, name='Arbeitspreis (€/MWh)', line=dict(color='yellow', width=2), yaxis='y2'))
 
+    # Calculate the range for the secondary y-axis
+    primary_y_range = [0, max(arbeitspreis_neu / arbeitspreis_neu[0] * 100)]
+
+    
     # Configure the first y-axis (left)
     fig.update_layout(
         yaxis=dict(
             title='Index/Preis (normiert 01/2021 = 100)',
-            side='left'
+            side='left',
+            range=primary_y_range
         )
     )
 
@@ -80,8 +85,9 @@ if not error_message:
 
     # Calculate the normalization factor
     normalization_factor = basis_arbeitspreis / arbeitspreis_neu[0]
+    secondary_y_range = [value * normalization_factor for value in primary_y_range]
     # Calculate the range for the secondary y-axis
-    secondary_y_range = [min(arbeitspreis_neu) * normalization_factor, max(arbeitspreis_neu) * normalization_factor]
+    #secondary_y_range = [min(arbeitspreis_neu) * normalization_factor, max(arbeitspreis_neu) * normalization_factor]
 
     # Configure the second y-axis (right)
     fig.update_layout(
