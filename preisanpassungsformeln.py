@@ -72,7 +72,6 @@ if not error_message:
     fig.update_layout(
         xaxis=dict(
             title='Datum',
-            rangeslider=dict(visible=True),
             type='date'
         ),
         yaxis=dict(
