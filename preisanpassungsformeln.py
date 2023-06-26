@@ -66,8 +66,9 @@ if not error_message:
     # Configure the first y-axis (left)
     fig.update_layout(
         yaxis=dict(
-            title='Preis',
-            side='left'
+            title='Index',
+            side='left',
+            tickfont=dict(color='blue')  # Set the tick labels to blue
         )
     )
 
@@ -81,6 +82,7 @@ if not error_message:
             side='right',
             overlaying='y',
             showgrid=False,
+            tickfont=dict(color='red'),  # Set the tick labels to red
             range=[0, max(arbeitspreis_neu) * scale_factor]  # Set the range based on the scale factor
         )
     )
