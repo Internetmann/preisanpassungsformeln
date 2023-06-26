@@ -84,9 +84,12 @@ if not error_message:
             overlaying='y',
             showgrid=False,
             tickfont=dict(color='red'),  # Set the tick labels to red
-            range=[0, scale_factor]  # Set the range based on the scale factor
+            zeroline=False,  # Hide the zeroline of the second y-axis
+            domain=[0, 1],  # Set the domain of the second y-axis
+            anchor='x'  # Anchor the second y-axis to the x-axis
         )
     )
+
 
     # Update the plot layout
     fig.update_layout(
@@ -101,9 +104,6 @@ if not error_message:
         margin=dict(l=20, r=20, t=60, b=20),
         showlegend=True  # Show legend for all traces
     )
-
-    # Remove the second y-axis line and ticks for the primary series
-    fig.update_yaxes(showline=False)
 
 
     # Display the input parameters and the plot
