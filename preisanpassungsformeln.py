@@ -94,7 +94,7 @@ if not error_message:
 """
 
     # Calculate the Arbeitspreis normalized to 100 in 02/2021
-    arbeitspreis_normalized = arbeitspreis_neu * 100 / arbeitspreis_neu[dates == '2021-02-01'].values[0]
+arbeitspreis_normalized = arbeitspreis_neu * 100 / arbeitspreis_neu[dates == '2021-02-01'].values[0]
 
     # Configure the second y-axis (right)
     fig.update_layout(
