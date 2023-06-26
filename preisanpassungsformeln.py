@@ -57,7 +57,7 @@ if not error_message:
 
     # Create the plot
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu, name='Arbeitspreis', line=dict(color='red', width=2)))
+    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu, name='Arbeitspreis (€/MWh)', line=dict(color='red', width=2)))
     fig.add_trace(go.Scatter(x=dates, y=waermepreis_index, name='Wärmepreisindex', line=dict(color='orange', width=2)))
     fig.add_trace(go.Scatter(x=dates, y=gas_index, name='Erdgas, bei Abgabe an die Industrie', line=dict(color='lightblue', width=2)))
     fig.add_trace(go.Scatter(x=dates, y=gas_index2, name='Erdgas, Börsennotierungen', line=dict(color='blue', width=2)))
