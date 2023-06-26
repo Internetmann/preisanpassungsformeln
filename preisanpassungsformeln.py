@@ -47,7 +47,7 @@ fig.update_layout(
 )
 
 # Display the input parameters and the plot side by side
-col1, col2 = st.beta_columns([1, 3])
+col1, col2 = st.columns([1, 3])
 
 with col1:
     st.subheader('Input Parameters')
@@ -62,4 +62,5 @@ with col2:
 # Provide feedback
 if total_elements == 1:
     st.success("Elements sum up to 1.")
+
 
