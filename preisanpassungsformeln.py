@@ -18,20 +18,24 @@ waermepreis_index = data['Wärmepreisindex']
 st.title('Fernwärme Arbeitspreisanpassung')
 
 # Input widgets
-col1, col2, col3, col4, col5 = st.columns(5)
+col1, col2, col3, col4, col5 = st.columns([1, 1, 1, 2])
+#st.columns(5)
 
 with col1:
-    fix_element = st.number_input('Fix-Element', min_value=0.0, max_value=1.0, step=0.01, value=0.2)
+    basis_arbeitspreis = st.number_input('Basis-Arbeitspreis', min_value=20, max_value=200, step=1, value=50)
 
 with col2:
-    Erdgas_Industrie = st.number_input('Erdgas, bei Abgabe an die Industrie', min_value=0.0, max_value=1.0, step=0.01, value=0.2)
+    fix_element = st.number_input('Fix-Element', min_value=0.0, max_value=1.0, step=0.01, value=0.2)
 
 with col3:
     marktelement = st.number_input('Marktelement', min_value=0.0, max_value=1.0, step=0.01, value=0.4)
 
-with col4:
-    basis_arbeitspreis = st.number_input('Basis-Arbeitspreis', min_value=20, max_value=200, step=1, value=50)
+col4, col5 = st.columns(2)  # Split column 4 and column 5
 
+col4.header('Kostenelement')
+with col4:
+    Erdgas_Industrie = st.number_input('Erdgas, bei Abgabe an die Industrie', min_value=0.0, max_value=1.0, step=0.01, value=0.2)
+col5.header('Kostenelement')
 with col5:
     Erdgas_Börse = st.number_input('Erdgas, Börsennotierungen', min_value=0.0, max_value=1.0, step=0.01, value=0.2)
 
@@ -53,8 +57,8 @@ if not error_message:
     # Create the plot
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu, name='Arbeitspreis', line=dict(color='red', width=2)))
-    fig.add_trace(go.Scatter(x=dates, y=gas_index, name='Erdgas, bei Abgabe an die Industrie', line=dict(color='blue', width=2)))
     fig.add_trace(go.Scatter(x=dates, y=waermepreis_index, name='Wärmepreisindex', line=dict(color='green', width=2)))
+    fig.add_trace(go.Scatter(x=dates, y=gas_index, name='Erdgas, bei Abgabe an die Industrie', line=dict(color='blue', width=2)))
     fig.add_trace(go.Scatter(x=dates, y=gas_index2, name='Erdgas, Börsennotierungen', line=dict(color='orange', width=2)))
 
     # Update the plot layout
