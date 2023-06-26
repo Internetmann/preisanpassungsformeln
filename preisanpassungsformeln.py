@@ -78,7 +78,7 @@ if not error_message:
     # Configure the first y-axis (left)
     fig.update_layout(
         yaxis=dict(
-            title='Index/Preis (normiert 01/2021 = 100)',
+            title='Alle Reihen normiert, 01/2021 = 100',
             side='left',
             range=primary_y_range
         )
@@ -100,6 +100,7 @@ if not error_message:
     fig.update_layout(
         yaxis2=dict(
             title='Arbeitspreis in €/MWh',
+            title_font=dict(color='red'),  # Set the title color to red
             side='right',
             overlaying='y',
             showgrid=False,
