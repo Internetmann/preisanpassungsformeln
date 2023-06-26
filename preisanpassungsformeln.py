@@ -58,7 +58,7 @@ if not error_message:
 
     # Create the plot
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu / arbeitspreis_neu[0] * 100, name='Arbeitspreis', line=dict(color='red', width=2)))
+    #fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu / arbeitspreis_neu[0] * 100, name='Arbeitspreis', line=dict(color='red', width=2)))
     fig.add_trace(go.Scatter(x=dates, y=waermepreis_index / waermepreis_index_0 * 100, name='Wärmepreisindex', line=dict(color='lightblue', width=2)))
     fig.add_trace(go.Scatter(x=dates, y=gas_index / gas_index_0 * 100, name='Erdgas, bei Abgabe an die Industrie', line=dict(color='blue', width=2)))
     fig.add_trace(go.Scatter(x=dates, y=gas_index2 / gas_index2_0 * 100, name='Erdgas, Börsennotierungen', line=dict(color='darkblue', width=2)))
@@ -73,7 +73,7 @@ if not error_message:
             side='left'
         )
     )
-"""
+
     # Calculate the scale factor for the second y-axis
     scale_factor = max(arbeitspreis_neu_scaled) / max(arbeitspreis_neu_scaled)  # Use the maximum value of Arbeitspreis
 
@@ -91,25 +91,6 @@ if not error_message:
 
     # Assign the scaled Arbeitspreis data to the second y-axis
     fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu_scaled * scale_factor, name='Arbeitspreis (€/MWh)', line=dict(color='red', width=2), yaxis='y2'))
-"""
-
-    # Calculate the Arbeitspreis normalized to 100 in 02/2021
-arbeitspreis_normalized = arbeitspreis_neu * 100 / arbeitspreis_neu[dates == '2021-02-01'].values[0]
-
-    # Configure the second y-axis (right)
-    fig.update_layout(
-        yaxis2=dict(
-            title='Arbeitspreis in €/MWh',
-            side='right',
-            overlaying='y',
-            showgrid=False,
-            tickfont=dict(color='red'),  # Set the tick labels to red
-            range=[0, max(arbeitspreis_normalized)]  # Set the range based on the maximum value of normalized Arbeitspreis
-        )
-    )
-
-    # Assign the normalized Arbeitspreis data to the second y-axis
-    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_normalized, name='Arbeitspreis (€/MWh)', line=dict(color='red', width=2), yaxis='y2'))
 
     # Update the plot layout
     fig.update_layout(
