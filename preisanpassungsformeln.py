@@ -60,7 +60,14 @@ if not error_message:
         title='Fernwärme Arbeitspreisanpassung',
         xaxis_title='Datum',
         yaxis_title='Preis',
-        legend_title='Kategorie',
+        legend=dict(
+            x=0,
+            y=1,
+            bgcolor='rgba(255, 255, 255, 0.5)',
+            orientation='v'
+        ),
+        autosize=True,
+        margin=dict(l=20, r=20, t=60, b=20)
     )
 
 # Display the input parameters
