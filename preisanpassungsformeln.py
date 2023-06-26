@@ -18,19 +18,32 @@ waermepreis_index = data['Wärmepreisindex']
 st.title('Fernwärme Arbeitspreisanpassung')
 
 # Input widgets
-fix_element = st.number_input('Fix-Element', min_value=0.0, max_value=1.0, step=0.01, value=0.2)
-kostenelement = st.number_input('Kostenelement', min_value=0.0, max_value=1.0, step=0.01, value=0.4)
-marktelement = st.number_input('Marktelement', min_value=0.0, max_value=1.0, step=0.01, value=0.4)
-basis_arbeitspreis = st.number_input('Basis-Arbeitspreis', min_value=20, max_value=200, step=1, value=50)
+col1, col2, col3, col4 = st.beta_columns(4)
+
+with col1:
+    st.subheader('Fix-Element')
+    fix_element = st.text_input('', value='0.2', max_chars=4)
+
+with col2:
+    st.subheader('Kostenelement')
+    kostenelement = st.text_input('', value='0.4', max_chars=4)
+
+with col3:
+    st.subheader('Marktelement')
+    marktelement = st.text_input('', value='0.4', max_chars=4)
+
+with col4:
+    st.subheader('Basis-Arbeitspreis')
+    basis_arbeitspreis = st.text_input('', value='50', max_chars=3)
 
 # Ensure the elements sum up to 1
-total_elements = fix_element + kostenelement + marktelement
+total_elements = float(fix_element) + float(kostenelement) + float(marktelement)
 if total_elements != 1:
     st.warning("Warning: The elements should sum up to 1.")
 
 # Calculate the Arbeitspreis_neu
-arbeitspreis_neu = basis_arbeitspreis * (fix_element + kostenelement * gas_index / gas_index_0 +
-                                         marktelement * waermepreis_index / waermepreis_index_0)
+arbeitspreis_neu = float(basis_arbeitspreis) * (float(fix_element) + float(kostenelement) * gas_index / gas_index_0 +
+                                               float(marktelement) * waermepreis_index / waermepreis_index_0)
 
 # Create the plot
 fig = go.Figure()
@@ -47,20 +60,16 @@ fig.update_layout(
 )
 
 # Display the input parameters and the plot side by side
-col1, col2 = st.columns([1, 3])
+col5, col6 = st.beta_columns([3, 5])
 
-with col1:
-    st.subheader('Input Parameters')
-    st.write('Fix-Element:', fix_element)
-    st.write('Kostenelement:', kostenelement)
-    st.write('Marktelement:', marktelement)
-    st.write('Basis-Arbeitspreis:', basis_arbeitspreis)
+with col5:
+    if total_elements == 1:
+        st.success("Elements sum up to 1.")
+    else:
+        st.warning("Warning: The elements should sum up to 1.")
 
-with col2:
+with col6:
     st.plotly_chart(fig)
 
-# Provide feedback
-if total_elements == 1:
-    st.success("Elements sum up to 1.")
 
 
