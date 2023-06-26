@@ -90,7 +90,9 @@ if not error_message:
     )
 
     # Set the color of the right y-axis title to red
-    fig.update_yaxes(title_font=dict(color='red'), secondary_y=True)
+    fig.update_layout(
+        yaxis2_title_font=dict(color='red')
+    )
 
     # Assign the scaled Arbeitspreis data to the second y-axis
     #fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu_scaled * scale_factor, name='Arbeitspreis (€/MWh)', line=dict(color='red', width=2), yaxis='y2'))
