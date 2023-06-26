@@ -95,8 +95,7 @@ if not error_message:
 
     # Hide the line for the Arbeitspreis (€/MWh) trace
     # Hide the line for the Arbeitspreis (€/MWh) trace
-    fig.update_traces(selector=dict(name='Arbeitspreis (Normalized)'), showlegend=False, line=dict(color='blue'))
-    fig.update_traces(selector=dict(name='Arbeitspreis (€/MWh)'), showlegend=False, line=dict(color='white'))
+    fig.update_traces(selector=dict(name='Arbeitspreis'), showlegend=False, line=dict(color='white'))
 
     
     # Update the plot layout
