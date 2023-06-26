@@ -22,28 +22,28 @@ cols = st.columns(4)
 
 with cols[0]:
     st.subheader('Fix-Element')
-    fix_element = st.text_input('', value='0.2', max_chars=4)
+    fix_element = st.number_input('', min_value=0.0, max_value=1.0, step=0.01, value=0.2)
 
 with cols[1]:
     st.subheader('Kostenelement')
-    kostenelement = st.text_input('', value='0.4', max_chars=4)
+    kostenelement = st.number_input('', min_value=0.0, max_value=1.0, step=0.01, value=0.4)
 
 with cols[2]:
     st.subheader('Marktelement')
-    marktelement = st.text_input('', value='0.4', max_chars=4)
+    marktelement = st.number_input('', min_value=0.0, max_value=1.0, step=0.01, value=0.4)
 
 with cols[3]:
     st.subheader('Basis-Arbeitspreis')
-    basis_arbeitspreis = st.text_input('', value='50', max_chars=3)
+    basis_arbeitspreis = st.number_input('', min_value=20, max_value=200, step=1, value=50)
 
 # Ensure the elements sum up to 1
-total_elements = float(fix_element) + float(kostenelement) + float(marktelement)
+total_elements = fix_element + kostenelement + marktelement
 if total_elements != 1:
     st.warning("Warning: The elements should sum up to 1.")
 
 # Calculate the Arbeitspreis_neu
-arbeitspreis_neu = float(basis_arbeitspreis) * (float(fix_element) + float(kostenelement) * gas_index / gas_index_0 +
-                                               float(marktelement) * waermepreis_index / waermepreis_index_0)
+arbeitspreis_neu = basis_arbeitspreis * (fix_element + kostenelement * gas_index / gas_index_0 +
+                                         marktelement * waermepreis_index / waermepreis_index_0)
 
 # Create the plot
 fig = go.Figure()
@@ -70,6 +70,7 @@ with col5:
 
 with col6:
     st.plotly_chart(fig)
+
 
 
 
