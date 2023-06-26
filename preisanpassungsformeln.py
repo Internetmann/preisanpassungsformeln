@@ -71,18 +71,22 @@ if not error_message:
         )
     )
 
+    # Calculate the scale factor for the second y-axis
+    scale_factor = max(arbeitspreis_neu) / max(arbeitspreis_neu)  # Use the maximum value of Arbeitspreis
+
     # Configure the second y-axis (right)
     fig.update_layout(
         yaxis2=dict(
             title='Arbeitspreis in €/MWh',
             side='right',
             overlaying='y',
-            showgrid=False
+            showgrid=False,
+            range=[0, max(arbeitspreis_neu) * scale_factor]  # Set the range based on the scale factor
         )
     )
 
     # Assign the Arbeitspreis data to the second y-axis
-    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu, name='Arbeitspreis (€/MWh)', line=dict(color='red', width=2), yaxis='y2'))
+    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu * scale_factor, name='Arbeitspreis (€/MWh)', line=dict(color='red', width=2), yaxis='y2'))
 
     # Update the plot layout
     fig.update_layout(
@@ -97,11 +101,11 @@ if not error_message:
         margin=dict(l=20, r=20, t=60, b=20)
     )
 
-# Display the input parameters and the plot
-if error_message:
-    st.error(error_message)
-else:
-    st.plotly_chart(fig, use_container_width=True)
+    # Display the input parameters and the plot
+    if error_message:
+        st.error(error_message)
+    else:
+        st.plotly_chart(fig, use_container_width=True)
 
 """    
     
