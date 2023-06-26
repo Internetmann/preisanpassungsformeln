@@ -52,6 +52,11 @@ else:
 
 # Create the plot if there is no error
 if not error_message:
+    # Calculate the normalized indices
+    gas_index_norm = gas_index / gas_index_0 * 100
+    gas_index2_norm = gas_index2 / gas_index2_0 * 100
+    waermepreis_index_norm = waermepreis_index / waermepreis_index_0 * 100
+
     # Calculate the Arbeitspreis_neu
     arbeitspreis_neu = basis_arbeitspreis * (fix_element +
                                              Erdgas_Industrie * gas_index / gas_index_0 +
@@ -67,9 +72,26 @@ if not error_message:
 
     # Update the plot layout
     fig.update_layout(
-        xaxis_title='Datum',
-        yaxis_title='Indizes (01/2021 = 100)',
-        yaxis2_title='Arbeitspreis in €/MWh',
+        xaxis=dict(
+            title='Datum',
+            titlefont=dict(
+                size=14,
+            ),
+        ),
+        yaxis=dict(
+            title='Indizes (01/2021 = 100)',
+            titlefont=dict(
+                size=14,
+            ),
+        ),
+        yaxis2=dict(
+            title='Arbeitspreis in €/MWh',
+            titlefont=dict(
+                size=14,
+            ),
+            overlaying='y',
+            side='right',
+        ),
         legend=dict(
             x=0,
             y=1,
@@ -80,18 +102,8 @@ if not error_message:
         margin=dict(l=20, r=20, t=60, b=20)
     )
 
-    # Add a second y-axis for Arbeitspreis
-    fig.update_layout(
-        yaxis2=dict(
-            overlaying='y',
-            side='right',
-            title='Arbeitspreis in €/MWh'
-        )
-    )
-
     # Display the plot
     st.plotly_chart(fig, use_container_width=True)
-
 
 
 """
