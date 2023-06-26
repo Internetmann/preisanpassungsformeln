@@ -92,7 +92,10 @@ if not error_message:
     )
 
     # Hide the second y-axis line and ticks
-    fig.update_yaxes(showline=False, secondary_y=True)
+    fig.update_layout(
+        yaxis2=dict(showline=False, zeroline=False, showticklabels=False),
+        yaxis=dict(zeroline=False)
+    )
 
     # Update the plot layout
     fig.update_layout(
