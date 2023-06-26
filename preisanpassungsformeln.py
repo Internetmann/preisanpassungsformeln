@@ -93,7 +93,7 @@ if not error_message:
 
     # Hide the second y-axis line and ticks
     fig.update_layout(
-        yaxis2=dict(showline=False, zeroline=False, showticklabels=False),
+        yaxis2=dict(showline=True, zeroline=False, showticklabels=True),
         yaxis=dict(zeroline=False)
     )
 
