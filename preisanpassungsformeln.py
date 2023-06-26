@@ -47,8 +47,8 @@ if not error_message:
 
     # Create the plot
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu, name='Arbeitspreis_neu'))
-    fig.add_trace(go.Scatter(x=dates, y=gas_index, name='Gasindex'))
+    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu, name='Arbeitspreis'))
+    fig.add_trace(go.Scatter(x=dates, y=gas_index, name='Erdgas, bei Abgabe an die Industrie'))
     fig.add_trace(go.Scatter(x=dates, y=waermepreis_index, name='Wärmepreisindex'))
 
     # Update the plot layout
