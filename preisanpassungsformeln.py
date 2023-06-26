@@ -85,7 +85,8 @@ if not error_message:
 
     # Calculate the normalization factor
     normalization_factor = basis_arbeitspreis / arbeitspreis_neu[0]
-    secondary_y_range = [value * normalization_factor for value in primary_y_range]
+    #secondary_y_range = [value * normalization_factor for value in primary_y_range]
+    secondary_y_range = [0, (max(arbeitspreis_neu / arbeitspreis_neu[0] * 100)) * normalization_factor]
     # Calculate the range for the secondary y-axis
     #secondary_y_range = [min(arbeitspreis_neu) * normalization_factor, max(arbeitspreis_neu) * normalization_factor]
 
