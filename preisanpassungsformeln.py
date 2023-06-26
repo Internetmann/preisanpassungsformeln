@@ -93,7 +93,7 @@ if not error_message:
     #fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu_scaled * scale_factor, name='Arbeitspreis (€/MWh)', line=dict(color='red', width=2), yaxis='y2'))
 
     # Hide the line for the Arbeitspreis (€/MWh) trace
-    fig.update_traces(selector=dict(name='Arbeitspreis (€/MWh)'), showlegend=False, line=dict(color='white'))
+    fig.update_traces(selector=dict(name='Arbeitspreis (€/MWh)'), showlegend=True, line=dict(color='white'))
 
     
     # Update the plot layout
