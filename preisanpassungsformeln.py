@@ -18,8 +18,7 @@ waermepreis_index = data['Wärmepreisindex']
 st.title('Fernwärme Arbeitspreisanpassung')
 
 # Input widgets
-col1, col2, col3, col4, col5 = st.columns([1, 1, 1, 2])
-#st.columns(5)
+col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
     basis_arbeitspreis = st.number_input('Basis-Arbeitspreis', min_value=20, max_value=200, step=1, value=50)
@@ -29,8 +28,6 @@ with col2:
 
 with col3:
     marktelement = st.number_input('Marktelement', min_value=0.0, max_value=1.0, step=0.01, value=0.4)
-
-col4, col5 = st.columns(2)  # Split column 4 and column 5
 
 col4.header('Kostenelement')
 with col4:
