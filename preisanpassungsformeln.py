@@ -127,9 +127,11 @@ if not error_message:
             side='left'
         )
     )
-    """
 
-    """
+
+
+
+
 
         # Calculate the scale factor for the second y-axis
     scale_factor = max(arbeitspreis_neu)  # Use the maximum value of Arbeitspreis
