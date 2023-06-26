@@ -76,7 +76,7 @@ if not error_message:
     # Calculate the scale factor for the second y-axis
     scale_factor = max(arbeitspreis_neu)
 
-    # Configure the second y-axis (right)
+        # Configure the second y-axis (right)
     fig.update_layout(
         yaxis2=dict(
             title='Arbeitspreis in €/MWh',
@@ -98,11 +98,13 @@ if not error_message:
             orientation='v'
         ),
         autosize=True,
-        margin=dict(l=20, r=20, t=60, b=20)
+        margin=dict(l=20, r=20, t=60, b=20),
+        showlegend=True  # Show legend for all traces
     )
 
     # Remove the second y-axis line and ticks for the primary series
-    fig.update_yaxes(showline=False, secondary_y=False)
+    fig.update_yaxes(showline=False)
+
 
     # Display the input parameters and the plot
     if error_message:
