@@ -106,10 +106,10 @@ if not error_message:
     fig.update_yaxes(showline=False, secondary_y=False)
 
     # Display the input parameters and the plot
-  if error_message:
-      st.error(error_message)
-  else:
-      st.plotly_chart(fig, use_container_width=True)
+ if error_message:
+     st.error(error_message)
+ else:
+     st.plotly_chart(fig, use_container_width=True)
 
     """
 
