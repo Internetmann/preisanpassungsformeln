@@ -86,7 +86,7 @@ if not error_message:
     # Calculate the normalization factor
     normalization_factor = basis_arbeitspreis / 100
     # Calculate the range for the secondary y-axis
-    primary_y_range = fig.layout.yaxis.range
+    primary_y_range = list(fig.layout.yaxis.range)
     secondary_y_range = [value * normalization_factor for value in primary_y_range]
     #secondary_y_range = [value * normalization_factor for value in primary_y_range]
     #secondary_y_range = [0, max(arbeitspreis_neu / arbeitspreis_neu[0] * 100) * normalization_factor]
