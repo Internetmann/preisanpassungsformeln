@@ -78,15 +78,16 @@ if not error_message:
 
         # Configure the second y-axis (right)
     fig.update_layout(
-    yaxis2=dict(
-        title='Arbeitspreis in €/MWh',
-        side='right',
-        overlaying='y',
-        showgrid=False,
-        tickfont=dict(color='red'),  # Set the tick labels to red
-        range=[0, max(arbeitspreis_neu)]  # Set the range based on the absolute values of Arbeitspreis
+        yaxis2=dict(
+            title='Arbeitspreis in €/MWh',
+            side='right',
+            overlaying='y',
+            showgrid=False,
+            tickfont=dict(color='red'),  # Set the tick labels to red
+            range=[0, max(arbeitspreis_neu)],  # Set the range based on the absolute values of Arbeitspreis
+            ticksuffix=' €/MWh'  # Add the currency suffix to the tick labels
+        )
     )
-)
 
 
 
