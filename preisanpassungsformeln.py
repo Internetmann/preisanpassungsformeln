@@ -25,7 +25,7 @@ waermepreis_index = data['Wärmepreisindex']
 st.title('Fernwärme Arbeitspreisanpassung')
 
 # Explanation text
-st.markdown("Testen Sie mit diesem Tool verschiedene Preisformeln und Ihre Auswirkungen auf den Arbeitspreis. Alle Indizes sind vom Statistischen Bundesamt, die Gewichtungen müssen zusammen 1 ergeben.")
+st.markdown("Testen Sie mit diesem Tool verschiedene Preisformeln und Ihre Auswirkungen auf den Arbeitspreis.")
 
 # Input widgets
 col1, col2, col3, col4, col5 = st.columns(5)
