@@ -32,7 +32,7 @@ with col3:
 col4.header('Kostenelement')
 with col4:
     Erdgas_Industrie = st.number_input('Erdgas, bei Abgabe an die Industrie', min_value=0.0, max_value=1.0, step=0.01, value=0.2)
-col5.header('Kostenelement')
+
 with col5:
     Erdgas_Börse = st.number_input('Erdgas, Börsennotierungen', min_value=0.0, max_value=1.0, step=0.01, value=0.2)
 
