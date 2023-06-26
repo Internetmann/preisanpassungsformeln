@@ -129,9 +129,9 @@ if not error_message:
 
     # Display the input parameters and the plot
      if error_message:
-        st.error(error_message)
+            st.error(error_message)
      else:
-        st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, use_container_width=True)
 
 
 
