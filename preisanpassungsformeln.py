@@ -1,5 +1,5 @@
-import streamlit as st
 import pandas as pd
+import streamlit as st
 import plotly.graph_objects as go
 
 # Load the data from the Excel file
@@ -13,11 +13,6 @@ dates = data['Datum']
 gas_index = data['Erdgas, bei Abgabe an die Industrie']
 gas_index2 = data['Erdgas, Börsennotierungen']
 waermepreis_index = data['Wärmepreisindex']
-
-# Normalize the indices to 100 at 01/2021
-gas_index_norm = gas_index / gas_index.loc[data['Datum'] == '01/2021'].values[0] * 100
-gas_index2_norm = gas_index2 / gas_index2.loc[data['Datum'] == '01/2021'].values[0] * 100
-waermepreis_index_norm = waermepreis_index / waermepreis_index.loc[data['Datum'] == '01/2021'].values[0] * 100
 
 # Set up the layout
 st.title('Fernwärme Arbeitspreisanpassung')
@@ -52,63 +47,59 @@ else:
 
 # Create the plot if there is no error
 if not error_message:
-# Calculate the normalized indices
-gas_index_norm = gas_index / gas_index_0 * 100
-gas_index2_norm = gas_index2 / gas_index2_0 * 100
-waermepreis_index_norm = waermepreis_index / waermepreis_index_0 * 100
+    # Calculate the normalized indices
+    gas_index_norm = gas_index / gas_index_0 * 100
+    gas_index2_norm = gas_index2 / gas_index2_0 * 100
+    waermepreis_index_norm = waermepreis_index / waermepreis_index_0 * 100
 
-# Calculate the Arbeitspreis_neu
-arbeitspreis_neu = basis_arbeitspreis * (fix_element +
-                                         Erdgas_Industrie * gas_index / gas_index_0 +
-                                         marktelement * waermepreis_index / waermepreis_index_0 +
-                                         Erdgas_Börse * gas_index2 / gas_index2_0) + 100 - basis_arbeitspreis
+    # Calculate the Arbeitspreis_neu
+    arbeitspreis_neu = basis_arbeitspreis * (fix_element +
+                                             Erdgas_Industrie * gas_index / gas_index_0 +
+                                             marktelement * waermepreis_index / waermepreis_index_0 +
+                                             Erdgas_Börse * gas_index2 / gas_index2_0)
 
-# Determine the y-axis range for the normalized data
-y_min = min(min(gas_index_norm), min(gas_index2_norm), min(waermepreis_index_norm), min(arbeitspreis_neu))
-y_max = max(max(gas_index_norm), max(gas_index2_norm), max(waermepreis_index_norm), max(arbeitspreis_neu))
+    # Normalize Arbeitspreis_neu to 100 at 01/2021
+    arbeitspreis_norm = arbeitspreis_neu / arbeitspreis_neu[0] * 100
 
-# Create the plot
-fig = go.Figure()
-fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu, name='Arbeitspreis', line=dict(color='red', width=2)))
-fig.add_trace(go.Scatter(x=dates, y=waermepreis_index_norm, name='Wärmepreisindex', line=dict(color='orange', width=2)))
-fig.add_trace(go.Scatter(x=dates, y=gas_index_norm, name='Erdgas, bei Abgabe an die Industrie', line=dict(color='lightblue', width=2)))
-fig.add_trace(go.Scatter(x=dates, y=gas_index2_norm, name='Erdgas, Börsennotierungen', line=dict(color='blue', width=2)))
+    # Create the plot
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_norm, name='Arbeitspreis (€/MWh)', line=dict(color='red', width=2)))
+    fig.add_trace(go.Scatter(x=dates, y=waermepreis_index_norm, name='Wärmepreisindex', line=dict(color='orange', width=2)))
+    fig.add_trace(go.Scatter(x=dates, y=gas_index_norm, name='Erdgas, bei Abgabe an die Industrie', line=dict(color='lightblue', width=2)))
+    fig.add_trace(go.Scatter(x=dates, y=gas_index2_norm, name='Erdgas, Börsennotierungen', line=dict(color='blue', width=2)))
 
-# Update the plot layout
-fig.update_layout(
-    xaxis=dict(
-        title='Datum',
-        titlefont=dict(
-            size=14,
+    # Update the plot layout
+    fig.update_layout(
+        xaxis=dict(
+            title='Datum',
+            rangeslider=dict(visible=True),
+            type='date'
         ),
-    ),
-    yaxis=dict(
-        title='Indizes (01/2021 = 100)',
-        titlefont=dict(
-            size=14,
+        yaxis=dict(
+            title='Indizes (01/2021 = 100)',
+            tickformat=",.0f"
         ),
-        range=[y_min, y_max],  # Set the y-axis range
-    ),
-    yaxis2=dict(
-        title='Arbeitspreis in €/MWh',
-        titlefont=dict(
-            size=14,
+        yaxis2=dict(
+            title='Arbeitspreis (€/MWh)',
+            overlaying='y',
+            side='right',
+            tickformat=",.0f"
         ),
-        overlaying='y',
-        side='right',
-    ),
-    legend=dict(
-        x=0,
-        y=1,
-        bgcolor='rgba(255, 255, 255, 0.5)',
-        orientation='v'
-    ),
-    autosize=True,
-    margin=dict(l=20, r=20, t=60, b=20)
-)
+        legend=dict(
+            x=0,
+            y=1,
+            bgcolor='rgba(255, 255, 255, 0.5)',
+            orientation='v'
+        ),
+        autosize=True,
+        margin=dict(l=20, r=20, t=60, b=20)
+    )
 
-# Display the plot
-st.plotly_chart(fig, use_container_width=True)
+    # Display the input parameters
+    if error_message:
+        st.error(error_message)
+    else:
+        st.plotly_chart(fig, use_container_width=True)
 
 
 
