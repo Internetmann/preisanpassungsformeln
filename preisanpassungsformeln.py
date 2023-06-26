@@ -65,7 +65,11 @@ if not error_message:
     fig.add_trace(go.Scatter(x=dates, y=gas_index2 / gas_index2_0 * 100, name='Erdgas, Börsennotierungen', line=dict(color='darkblue', width=2)))
 
     # Add the dummy trace for the secondary y-axis
-    #fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu / arbeitspreis_neu[0] * 100, name='Arbeitspreis (€/MWh)', line=dict(color='yellow', width=2), yaxis='y2'))
+    # Add the dummy trace for the secondary y-axis
+    #fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu, name='Arbeitspreis (€/MWh)', line=dict(color='rgba(0,0,0,0)', width=0), yaxis='y2'))
+    # Add the invisible dummy trace to determine the range of the primary y-axis
+    dummy_trace = go.Scatter(x=dates, y=arbeitspreis_neu / arbeitspreis_neu[0] * 100, showlegend=False,line=dict(color='rgba(0,0,0,0)', width=0), yaxis='y2')
+    fig.add_trace(dummy_trace)
 
     # Calculate the range for the secondary y-axis
     primary_y_range = [0, 1200]
