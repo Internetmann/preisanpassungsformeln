@@ -39,7 +39,7 @@ with cols[3]:
 # Ensure the elements sum up to 1
 total_elements = fix_element + kostenelement + marktelement
 if total_elements != 1:
-    st.warning("Warning: The elements should sum up to 1.")
+    st.error(f"Die Gewichtungen ergeben {total_elements} statt 1.")
 
 # Calculate the Arbeitspreis_neu
 arbeitspreis_neu = basis_arbeitspreis * (fix_element + kostenelement * gas_index / gas_index_0 +
@@ -64,12 +64,13 @@ col5, col6 = st.columns([3, 5])
 
 with col5:
     if total_elements == 1:
-        st.success("Elements sum up to 1.")
+        pass  # No message if the elements sum up to 1
     else:
-        st.warning("Warning: The elements should sum up to 1.")
+        st.error(f"Die Gewichtungen ergeben {total_elements} statt 1.")
 
 with col6:
     st.plotly_chart(fig)
+
 
 
 
