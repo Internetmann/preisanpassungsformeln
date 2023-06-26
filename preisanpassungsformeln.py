@@ -65,7 +65,7 @@ if not error_message:
     fig.add_trace(go.Scatter(x=dates, y=gas_index2 / gas_index2_0 * 100, name='Erdgas, Börsennotierungen', line=dict(color='darkblue', width=2)))
 
     # Add the dummy trace for the secondary y-axis
-    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu / arbeitspreis_neu[0] * 50, name='Arbeitspreis (€/MWh)', line=dict(color='yellow', width=2), yaxis='y2'))
+    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu / arbeitspreis_neu[0] * 100, name='Arbeitspreis (€/MWh)', line=dict(color='yellow', width=2), yaxis='y2'))
 
     # Calculate the range for the secondary y-axis
     primary_y_range = [0, max(arbeitspreis_neu / arbeitspreis_neu[0] * 100)]
@@ -86,7 +86,7 @@ if not error_message:
     # Calculate the normalization factor
     normalization_factor = basis_arbeitspreis / arbeitspreis_neu[0]
     #secondary_y_range = [value * normalization_factor for value in primary_y_range]
-    secondary_y_range = [0, (max(arbeitspreis_neu / arbeitspreis_neu[0] * 100) * normalization_factor)]
+    secondary_y_range = [0, (max(arbeitspreis_neu / arbeitspreis_neu[0] * 100) * 0.5)]
     # Calculate the range for the secondary y-axis
     #secondary_y_range = [min(arbeitspreis_neu) * normalization_factor, max(arbeitspreis_neu) * normalization_factor]
 
