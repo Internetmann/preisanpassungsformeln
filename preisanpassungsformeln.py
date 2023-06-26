@@ -14,9 +14,6 @@ dates = data['Datum']
 gas_index = data['Erdgas, bei Abgabe an die Industrie']
 waermepreis_index = data['Wärmepreisindex']
 
-# Set the theme to light mode
-st.set_theme('light')
-
 # Set up the layout
 st.title('Fernwärme Arbeitspreisanpassung')
 
