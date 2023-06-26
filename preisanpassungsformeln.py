@@ -43,35 +43,39 @@ if total_elements != 1:
 else:
     error_message = ""
 
-# Calculate the Arbeitspreis_neu
-arbeitspreis_neu = basis_arbeitspreis * (fix_element + kostenelement * gas_index / gas_index_0 +
-                                         marktelement * waermepreis_index / waermepreis_index_0)
+# Create the plot if there is no error
+if not error_message:
+    # Calculate the Arbeitspreis_neu
+    arbeitspreis_neu = basis_arbeitspreis * (fix_element + kostenelement * gas_index / gas_index_0 +
+                                             marktelement * waermepreis_index / waermepreis_index_0)
 
-# Create the plot
-fig = go.Figure()
-fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu, name='Arbeitspreis_neu'))
-fig.add_trace(go.Scatter(x=dates, y=gas_index, name='Gasindex'))
-fig.add_trace(go.Scatter(x=dates, y=waermepreis_index, name='Wärmepreisindex'))
+    # Create the plot
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu, name='Arbeitspreis_neu'))
+    fig.add_trace(go.Scatter(x=dates, y=gas_index, name='Gasindex'))
+    fig.add_trace(go.Scatter(x=dates, y=waermepreis_index, name='Wärmepreisindex'))
 
-# Update the plot layout
-fig.update_layout(
-    title='Fernwärme Arbeitspreisanpassung',
-    xaxis_title='Datum',
-    yaxis_title='Preis',
-    legend_title='Kategorie',
-)
+    # Update the plot layout
+    fig.update_layout(
+        title='Fernwärme Arbeitspreisanpassung',
+        xaxis_title='Datum',
+        yaxis_title='Preis',
+        legend_title='Kategorie',
+    )
 
-# Display the input parameters and the plot
+# Display the input parameters and the plot/error message
 col1, col2 = st.columns([4, 8])
 
 with col1:
     if error_message:
         st.error(error_message)
-    else:
-        st.success("Elements sum up to 1.")
 
 with col2:
-    st.plotly_chart(fig, use_container_width=True)
+    if error_message:
+        st.write("Please fix the input parameters.")
+    else:
+        st.plotly_chart(fig, use_container_width=True)
+
 
 
 
