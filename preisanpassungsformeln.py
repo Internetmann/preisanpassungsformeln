@@ -16,13 +16,12 @@ waermepreis_index = data['Wärmepreisindex']
 
 # Set up the layout
 st.title('Fernwärme Arbeitspreisanpassung')
-st.sidebar.header('Input Parameters')
 
 # Input widgets
-fix_element = st.sidebar.number_input('Fix-Element', min_value=0.0, max_value=1.0, step=0.01, value=0.2)
-kostenelement = st.sidebar.number_input('Kostenelement', min_value=0.0, max_value=1.0, step=0.01, value=0.4)
-marktelement = st.sidebar.number_input('Marktelement', min_value=0.0, max_value=1.0, step=0.01, value=0.4)
-basis_arbeitspreis = st.sidebar.number_input('Basis-Arbeitspreis', min_value=20, max_value=200, step=1, value=50)
+fix_element = st.number_input('Fix-Element', min_value=0.0, max_value=1.0, step=0.01, value=0.2)
+kostenelement = st.number_input('Kostenelement', min_value=0.0, max_value=1.0, step=0.01, value=0.4)
+marktelement = st.number_input('Marktelement', min_value=0.0, max_value=1.0, step=0.01, value=0.4)
+basis_arbeitspreis = st.number_input('Basis-Arbeitspreis', min_value=20, max_value=200, step=1, value=50)
 
 # Ensure the elements sum up to 1
 total_elements = fix_element + kostenelement + marktelement
@@ -47,9 +46,20 @@ fig.update_layout(
     legend_title='Kategorie',
 )
 
-# Display the plot
-st.plotly_chart(fig)
+# Display the input parameters and the plot side by side
+col1, col2 = st.beta_columns([1, 3])
+
+with col1:
+    st.subheader('Input Parameters')
+    st.write('Fix-Element:', fix_element)
+    st.write('Kostenelement:', kostenelement)
+    st.write('Marktelement:', marktelement)
+    st.write('Basis-Arbeitspreis:', basis_arbeitspreis)
+
+with col2:
+    st.plotly_chart(fig)
 
 # Provide feedback
 if total_elements == 1:
     st.success("Elements sum up to 1.")
+
