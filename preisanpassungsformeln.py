@@ -14,6 +14,11 @@ gas_index = data['Erdgas, bei Abgabe an die Industrie']
 gas_index2 = data['Erdgas, Börsennotierungen']
 waermepreis_index = data['Wärmepreisindex']
 
+# Normalize the indices to 100 at 01/2021
+gas_index_norm = gas_index / gas_index.loc[data['Datum'] == '01/2021'].values[0] * 100
+gas_index2_norm = gas_index2 / gas_index2.loc[data['Datum'] == '01/2021'].values[0] * 100
+waermepreis_index_norm = waermepreis_index / waermepreis_index.loc[data['Datum'] == '01/2021'].values[0] * 100
+
 # Set up the layout
 st.title('Fernwärme Arbeitspreisanpassung')
 
@@ -48,78 +53,6 @@ else:
 # Create the plot if there is no error
 if not error_message:
     # Calculate the Arbeitspreis_neu
-    arbeitspreis_neu = basis_arbeitspreis * (fix_element +
-                                             Erdgas_Industrie * gas_index / gas_index_0 +
-                                             marktelement * waermepreis_index / waermepreis_index_0 +
-                                             Erdgas_Börse * gas_index2 / gas_index2_0)
-
-    # Create the plot
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu / arbeitspreis_neu[0] * 100, name='Arbeitspreis', line=dict(color='red', width=2)))
-    fig.add_trace(go.Scatter(x=dates, y=waermepreis_index / waermepreis_index_0 * 100,
-                             name='Wärmepreisindex', line=dict(color='lightblue', width=2)))
-    fig.add_trace(go.Scatter(x=dates, y=gas_index / gas_index_0 * 100,
-                             name='Erdgas, bei Abgabe an die Industrie', line=dict(color='blue', width=2)))
-    fig.add_trace(go.Scatter(x=dates, y=gas_index2 / gas_index2_0 * 100,
-                             name='Erdgas, Börsennotierungen', line=dict(color='darkblue', width=2)))
-
-    # Add the invisible dummy trace to determine the range of the primary y-axis
-    dummy_trace = go.Scatter(x=dates, y=arbeitspreis_neu / arbeitspreis_neu[0] * 100,
-                             showlegend=False, line=dict(color='rgba(0,0,0,0)', width=0), yaxis='y2')
-    fig.add_trace(dummy_trace)
-
-    # Calculate the range for the primary y-axis
-    primary_y_range = [0, max(arbeitspreis_neu / arbeitspreis_neu[0] * 100) * 1.2]
-
-    # Configure the first y-axis (left)
-    fig.update_layout(
-        yaxis=dict(
-            title='Alle Reihen normiert, 01/2021 = 100',
-            side='left',
-            range=primary_y_range
-        )
-    )
-
-    # Calculate the normalization factor
-    normalization_factor = basis_arbeitspreis / 100
-
-    # Calculate the range for the secondary y-axis
-    secondary_y_range = [value * normalization_factor for value in primary_y_range]
-
-    # Configure the second y-axis (right)
-    fig.update_layout(
-        yaxis2=dict(
-            title='Arbeitspreis in €/MWh',
-            title_font=dict(color='red'),
-            side='right',
-            overlaying='y',
-            showgrid=False,
-            tickfont=dict(color='red'),
-            range=secondary_y_range,
-            ticksuffix=' €/MWh'
-        )
-    )
-
-    # Update the plot layout
-    fig.update_layout(
-        xaxis_title='Datum',
-        legend=dict(
-            x=0,
-            y=1,
-            bgcolor='rgba(255, 255, 255, 0.5)',
-            orientation='v'
-        ),
-        autosize=True,
-        margin=dict(l=20, r=20, t=60, b=20),
-        showlegend=True
-    )
-
-    # Display the input parameters and the plot
-    if error_message:
-        st.error(error_message)
-    else:
-        st.plotly_chart(fig, use_container_width=True)
-
 
 
 
