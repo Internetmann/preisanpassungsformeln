@@ -14,6 +14,9 @@ dates = data['Datum']
 gas_index = data['Erdgas, bei Abgabe an die Industrie']
 waermepreis_index = data['Wärmepreisindex']
 
+# Set the theme to light mode
+st.set_theme('light')
+
 # Set up the layout
 st.title('Fernwärme Arbeitspreisanpassung')
 
@@ -47,9 +50,9 @@ if not error_message:
 
     # Create the plot
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu, name='Arbeitspreis'))
-    fig.add_trace(go.Scatter(x=dates, y=gas_index, name='Erdgas, bei Abgabe an die Industrie'))
-    fig.add_trace(go.Scatter(x=dates, y=waermepreis_index, name='Wärmepreisindex'))
+    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu, name='Arbeitspreis', line=dict(color='red', width=2)))))
+    fig.add_trace(go.Scatter(x=dates, y=gas_index, name='Erdgas, bei Abgabe an die Industrie', line=dict(color='blue', width=2)))))
+    fig.add_trace(go.Scatter(x=dates, y=waermepreis_index, name='Wärmepreisindex', line=dict(color='green', width=2)))))
 
     # Update the plot layout
     fig.update_layout(
