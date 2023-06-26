@@ -67,9 +67,7 @@ if not error_message:
     fig.update_layout(
         yaxis=dict(
             title='Index',
-            side='left',
-            tickfont=dict(color='blue')  # Set the tick labels to blue
-        )
+            side='left'        )
     )
 
     # Calculate the scale factor for the second y-axis
