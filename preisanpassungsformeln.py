@@ -66,7 +66,7 @@ if not error_message:
     fig.add_trace(go.Scatter(x=dates, y=gas_index2 / gas_index2_0 * 100, name='Erdgas, Börsennotierungen', line=dict(color='darkblue', width=2)))
 
     # Add the dummy trace for the secondary y-axis
-    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu, name='Arbeitspreis (€/MWh)', line=dict(color='rgba(0,0,0,0)', width=0), yaxis='y2'))
+    fig.add_trace(go.Scatter(x=dates, y=gas_index, name='Arbeitspreis (€/MWh)', line=dict(color='rgba(0,0,0,0)', width=0), yaxis='y2'))
 
     # Configure the first y-axis (left)
     fig.update_layout(
