@@ -39,7 +39,9 @@ with cols[3]:
 # Ensure the elements sum up to 1
 total_elements = fix_element + kostenelement + marktelement
 if total_elements != 1:
-    st.error(f"Die Gewichtungen ergeben {total_elements} statt 1.")
+    error_message = f"Die Gewichtungen ergeben {total_elements:.2f} statt 1."
+else:
+    error_message = ""
 
 # Calculate the Arbeitspreis_neu
 arbeitspreis_neu = basis_arbeitspreis * (fix_element + kostenelement * gas_index / gas_index_0 +
@@ -59,17 +61,18 @@ fig.update_layout(
     legend_title='Kategorie',
 )
 
-# Display the input parameters and the plot side by side
-col5, col6 = st.columns([3, 5])
+# Display the input parameters and the plot
+col1, col2 = st.columns([4, 8])
 
-with col5:
-    if total_elements == 1:
-        pass  # No message if the elements sum up to 1
+with col1:
+    if error_message:
+        st.error(error_message)
     else:
-        st.error(f"Die Gewichtungen ergeben {total_elements} statt 1.")
+        st.success("Elements sum up to 1.")
 
-with col6:
-    st.plotly_chart(fig)
+with col2:
+    st.plotly_chart(fig, use_container_width=True)
+
 
 
 
