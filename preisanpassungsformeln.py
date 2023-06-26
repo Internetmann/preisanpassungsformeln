@@ -87,15 +87,13 @@ if not error_message:
             overlaying='y',
             showgrid=False,
             tickfont=dict(color='red'),  # Set the tick labels to red
-            range=[0, scale_factor]  # Set the range based on the scale factor
+            range=[0, max(arbeitspreis_neu)]  # Set the range based on the scale factor
         )
     )
 
-    # Hide the second y-axis line and ticks
-    fig.update_layout(
-        yaxis2=dict(showline=True, zeroline=True, showticklabels=True),
-        yaxis=dict(zeroline=True)
-    )
+    # Assign the scaled Arbeitspreis data to the second y-axis
+    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu, name='Arbeitspreis (€/MWh)', line=dict(color='red', width=2), yaxis='y2'))
+
 
     # Update the plot layout
     fig.update_layout(
