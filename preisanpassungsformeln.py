@@ -1,5 +1,8 @@
 #pip install dash
 
+import os
+os.environ["WERKZEUG_RUN_MAIN"] = "true"
+
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
