@@ -18,21 +18,21 @@ waermepreis_index = data['Wärmepreisindex']
 st.title('Fernwärme Arbeitspreisanpassung')
 
 # Input widgets
-col1, col2, col3, col4 = st.beta_columns(4)
+cols = st.columns(4)
 
-with col1:
+with cols[0]:
     st.subheader('Fix-Element')
     fix_element = st.text_input('', value='0.2', max_chars=4)
 
-with col2:
+with cols[1]:
     st.subheader('Kostenelement')
     kostenelement = st.text_input('', value='0.4', max_chars=4)
 
-with col3:
+with cols[2]:
     st.subheader('Marktelement')
     marktelement = st.text_input('', value='0.4', max_chars=4)
 
-with col4:
+with cols[3]:
     st.subheader('Basis-Arbeitspreis')
     basis_arbeitspreis = st.text_input('', value='50', max_chars=3)
 
@@ -60,7 +60,7 @@ fig.update_layout(
 )
 
 # Display the input parameters and the plot side by side
-col5, col6 = st.beta_columns([3, 5])
+col5, col6 = st.columns([3, 5])
 
 with col5:
     if total_elements == 1:
@@ -70,6 +70,7 @@ with col5:
 
 with col6:
     st.plotly_chart(fig)
+
 
 
 
