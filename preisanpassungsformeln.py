@@ -74,7 +74,44 @@ if not error_message:
         )
     )
 
+        # Calculate the scale factor for the second y-axis
+    scale_factor = max(arbeitspreis_neu)
 
+    # Configure the second y-axis (right)
+    fig.update_layout(
+        yaxis2=dict(
+            title='Arbeitspreis in €/MWh',
+            side='right',
+            overlaying='y',
+            showgrid=False,
+            tickfont=dict(color='red'),  # Set the tick labels to red
+            range=[0, scale_factor]  # Set the range based on the scale factor
+        )
+    )
+
+    # Update the plot layout
+    fig.update_layout(
+        xaxis_title='Datum',
+        legend=dict(
+            x=0,
+            y=1,
+            bgcolor='rgba(255, 255, 255, 0.5)',
+            orientation='v'
+        ),
+        autosize=True,
+        margin=dict(l=20, r=20, t=60, b=20)
+    )
+
+    # Remove the second y-axis line and ticks for the primary series
+    fig.update_yaxes(showline=False, secondary_y=False)
+
+    # Display the input parameters and the plot
+  if error_message:
+      st.error(error_message)
+  else:
+      st.plotly_chart(fig, use_container_width=True)
+
+    """
 
         # Calculate the scale factor for the second y-axis
     scale_factor = max(arbeitspreis_neu)  # Use the maximum value of Arbeitspreis
@@ -113,7 +150,12 @@ if not error_message:
         st.error(error_message)
     else:
         st.plotly_chart(fig, use_container_width=True)
+"""
 
+
+
+
+    
     """
     # Calculate the scale factor for the second y-axis
     scale_factor = max(arbeitspreis_neu_scaled) / max(arbeitspreis_neu_scaled)  # Use the maximum value of Arbeitspreis
