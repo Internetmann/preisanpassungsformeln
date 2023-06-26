@@ -8,8 +8,9 @@ import plotly.graph_objects as go
 import pandas as pd
 
 # Load the data from the Excel file
-github_url = 'https://raw.githubusercontent.com/Internetmann/preisanpassungsformeln/main/widget_data.xlsx'
-data = pd.read_excel(github_url)
+#github_url = 'https://raw.githubusercontent.com/Internetmann/preisanpassungsformeln/main/widget_data.xlsx'
+#data = pd.read_excel(github_url)
+data = pd.read_excel('widget_data.xlsx')
 
 # Extract the relevant columns from the data
 gas_index_0 = data['Erdgas, bei Abgabe an die Industrie'][0]
