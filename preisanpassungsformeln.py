@@ -56,15 +56,14 @@ if not error_message:
                                              Erdgas_Börse * gas_index2 / gas_index2_0)
 
 
+
+
     # Create the plot
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu / arbeitspreis_neu[0] * 100, name='Arbeitspreis', line=dict(color='red', width=2)))
     fig.add_trace(go.Scatter(x=dates, y=waermepreis_index / waermepreis_index_0 * 100, name='Wärmepreisindex', line=dict(color='lightblue', width=2)))
     fig.add_trace(go.Scatter(x=dates, y=gas_index / gas_index_0 * 100, name='Erdgas, bei Abgabe an die Industrie', line=dict(color='blue', width=2)))
     fig.add_trace(go.Scatter(x=dates, y=gas_index2 / gas_index2_0 * 100, name='Erdgas, Börsennotierungen', line=dict(color='darkblue', width=2)))
-
-    # Calculate the Arbeitspreis_neu scaled to start at 100 in 01/2021
-    arbeitspreis_neu_scaled = arbeitspreis_neu / arbeitspreis_neu[0] * 100
 
     # Configure the first y-axis (left)
     fig.update_layout(
@@ -74,7 +73,7 @@ if not error_message:
         )
     )
 
-        # Calculate the scale factor for the second y-axis
+    # Calculate the scale factor for the second y-axis
     scale_factor = max(arbeitspreis_neu)
 
     # Configure the second y-axis (right)
@@ -106,10 +105,29 @@ if not error_message:
     fig.update_yaxes(showline=False, secondary_y=False)
 
     # Display the input parameters and the plot
- if error_message:
-     st.error(error_message)
- else:
-     st.plotly_chart(fig, use_container_width=True)
+    if error_message:
+        st.error(error_message)
+    else:
+        st.plotly_chart(fig, use_container_width=True)
+"""
+        # Create the plot
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu / arbeitspreis_neu[0] * 100, name='Arbeitspreis', line=dict(color='red', width=2)))
+    fig.add_trace(go.Scatter(x=dates, y=waermepreis_index / waermepreis_index_0 * 100, name='Wärmepreisindex', line=dict(color='lightblue', width=2)))
+    fig.add_trace(go.Scatter(x=dates, y=gas_index / gas_index_0 * 100, name='Erdgas, bei Abgabe an die Industrie', line=dict(color='blue', width=2)))
+    fig.add_trace(go.Scatter(x=dates, y=gas_index2 / gas_index2_0 * 100, name='Erdgas, Börsennotierungen', line=dict(color='darkblue', width=2)))
+
+    # Calculate the Arbeitspreis_neu scaled to start at 100 in 01/2021
+    arbeitspreis_neu_scaled = arbeitspreis_neu / arbeitspreis_neu[0] * 100
+
+    # Configure the first y-axis (left)
+    fig.update_layout(
+        yaxis=dict(
+            title='Index/Preis (normiert 01/2021 = 100)',
+            side='left'
+        )
+    )
+    """
 
     """
 
