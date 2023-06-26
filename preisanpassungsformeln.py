@@ -18,21 +18,21 @@ waermepreis_index = data['Wärmepreisindex']
 st.title('Fernwärme Arbeitspreisanpassung')
 
 # Input widgets
-cols = st.columns(4)
+col1, col2, col3, col4 = st.columns(4)
 
-with cols[0]:
+with col1:
     st.subheader('Fix-Element')
     fix_element = st.number_input('Fix-Element', min_value=0.0, max_value=1.0, step=0.01, value=0.2)
 
-with cols[1]:
+with col2:
     st.subheader('Kostenelement')
     kostenelement = st.number_input('Kostenelement', min_value=0.0, max_value=1.0, step=0.01, value=0.4)
 
-with cols[2]:
+with col3:
     st.subheader('Marktelement')
     marktelement = st.number_input('Marktelement', min_value=0.0, max_value=1.0, step=0.01, value=0.4)
 
-with cols[3]:
+with col4:
     st.subheader('Basis-Arbeitspreis')
     basis_arbeitspreis = st.number_input('Basis-Arbeitspreis', min_value=20, max_value=200, step=1, value=50)
 
@@ -63,18 +63,12 @@ if not error_message:
         legend_title='Kategorie',
     )
 
-# Display the input parameters and the plot/error message
-col1, col2 = st.columns([4, 8])
+# Display the input parameters
+if error_message:
+    st.error(error_message)
+else:
+    st.plotly_chart(fig, use_container_width=True)
 
-with col1:
-    if error_message:
-        st.error(error_message)
-
-with col2:
-    if error_message:
-        st.write("Please fix the input parameters.")
-    else:
-        st.plotly_chart(fig, use_container_width=False)
 
 
 
