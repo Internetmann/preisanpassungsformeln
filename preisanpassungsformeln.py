@@ -19,9 +19,6 @@ st.title('Fernwärme Arbeitspreisanpassung')
 
 # Explanation text
 st.markdown("Testen Sie mit diesem Tool verschiedene Preisformeln und Ihre Auswirkungen auf den Arbeitspreis. Alle Indizes sind vom Statistischen Bundesamt, die Gewichtungen müssen zusammen 1 ergeben.")
-# Explanation text
-st.markdown("Der Wärmepreisindex ist ein idealtypischer Repräsentant für den Wärmemarkt und prädestiniert für das Marktelement. Die beiden Erdgasindizes repräsentieren Brennstoffkosten für Gas - (1) im deutschen Durchschnitt bei Abgabe an die Industrie, (2) anhand der Preise an der Energiebörse EEX.")
-
 
 # Input widgets
 col1, col2, col3, col4, col5 = st.columns(5)
@@ -33,13 +30,13 @@ with col2:
     fix_element = st.number_input('Fix-Element', min_value=0.0, max_value=1.0, step=0.01, value=0.2)
 
 with col3:
-    marktelement = st.number_input('Marktelement', min_value=0.0, max_value=1.0, step=0.01, value=0.4)
+    marktelement = st.number_input('Wärmemarktindex (Marktelement)', min_value=0.0, max_value=1.0, step=0.01, value=0.4)
 
 with col4:
-    Erdgas_Industrie = st.number_input('Erdgas, bei Abgabe an die Industrie', min_value=0.0, max_value=1.0, step=0.01, value=0.2)
+    Erdgas_Industrie = st.number_input('Erdgas, bei Abgabe an die Industrie (Kostenelement)', min_value=0.0, max_value=1.0, step=0.01, value=0.2)
 
 with col5:
-    Erdgas_Börse = st.number_input('Erdgas, Börsennotierungen', min_value=0.0, max_value=1.0, step=0.01, value=0.2)
+    Erdgas_Börse = st.number_input('Erdgas, Börsennotierungen (Kostenelement)', min_value=0.0, max_value=1.0, step=0.01, value=0.2)
 
 # Ensure the elements sum up to 1
 total_elements = fix_element + Erdgas_Industrie + marktelement + Erdgas_Börse
