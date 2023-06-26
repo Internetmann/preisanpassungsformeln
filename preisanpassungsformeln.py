@@ -78,6 +78,8 @@ if not error_message:
     # Calculate the scale factor for the second y-axis
     scale_factor = max(arbeitspreis_neu)
 
+    # Calculate the normalization factor
+    normalization_factor = basis_arbeitspreis / arbeitspreis_neu[0]
     # Calculate the range for the secondary y-axis
     secondary_y_range = [min(arbeitspreis_neu) * normalization_factor, max(arbeitspreis_neu) * normalization_factor]
 
