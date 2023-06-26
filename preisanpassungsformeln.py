@@ -55,6 +55,56 @@ if not error_message:
                                              marktelement * waermepreis_index / waermepreis_index_0 +
                                              Erdgas_Börse * gas_index2 / gas_index2_0)
 
+
+    # Create the plot
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu, name='Arbeitspreis', line=dict(color='red', width=2)))
+    fig.add_trace(go.Scatter(x=dates, y=waermepreis_index, name='Wärmepreisindex', line=dict(color='orange', width=2)))
+    fig.add_trace(go.Scatter(x=dates, y=gas_index, name='Erdgas, bei Abgabe an die Industrie', line=dict(color='lightblue', width=2)))
+    fig.add_trace(go.Scatter(x=dates, y=gas_index2, name='Erdgas, Börsennotierungen', line=dict(color='blue', width=2)))
+
+    # Configure the first y-axis (left)
+    fig.update_layout(
+        yaxis=dict(
+            title='Preis',
+            side='left'
+        )
+    )
+
+    # Configure the second y-axis (right)
+    fig.update_layout(
+        yaxis2=dict(
+            title='Arbeitspreis in €/MWh',
+            side='right',
+            overlaying='y',
+            showgrid=False
+        )
+    )
+
+    # Assign the Arbeitspreis data to the second y-axis
+    fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu, name='Arbeitspreis (€/MWh)', line=dict(color='red', width=2), yaxis='y2'))
+
+    # Update the plot layout
+    fig.update_layout(
+        xaxis_title='Datum',
+        legend=dict(
+            x=0,
+            y=1,
+            bgcolor='rgba(255, 255, 255, 0.5)',
+            orientation='v'
+        ),
+        autosize=True,
+        margin=dict(l=20, r=20, t=60, b=20)
+    )
+
+# Display the input parameters and the plot
+if error_message:
+    st.error(error_message)
+else:
+    st.plotly_chart(fig, use_container_width=True)
+
+"""    
+    
     # Create the plot
     fig = go.Figure()
     #fig.add_trace(go.Scatter(x=dates, y=arbeitspreis_neu, name='Arbeitspreis (€/MWh)', line=dict(color='red', width=2)))
@@ -94,7 +144,7 @@ if error_message:
     st.error(error_message)
 else:
     st.plotly_chart(fig, use_container_width=True)
-
+"""
 """
 
 import streamlit as st
