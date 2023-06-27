@@ -1,4 +1,5 @@
-
+# Import the Fraction class from the fractions module
+from fractions import Fraction
 
 
 
