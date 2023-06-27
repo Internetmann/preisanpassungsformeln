@@ -145,7 +145,7 @@ else:
         f" {marktelement * 100:.2f}% * Wärmepreisindex / {waermepreis_index_0} + \n"
         f" {Erdgas_Industrie * 100:.2f}% * Erdgas (Abgabe an Industrie) / {gas_index_0} + "
         f"{Erdgas_Börse * 100:.2f}% * Erdgas (Börse) / {gas_index2_0})\n\n"
-        f"Gewichtung Marktelement zu Kostenelement: {(marktelement / (Erdgas_Industrie + Erdgas_Börse))}"
+        f"Gewichtung Marktelement zu Kostenelement: {(marktelement / (marktelement + Erdgas_Industrie + Erdgas_Börse)) * 100:.2f}% <-> {((Erdgas_Industrie + Erdgas_Börse) / (marktelement + Erdgas_Industrie + Erdgas_Börse)) * 100:.2f}%"
     )
 
     # Display the formula with formatting
