@@ -141,14 +141,14 @@ else:
     # Generate the formula string with weights as percentages
     formula = (
         f"Arbeitspreis_neu = {basis_arbeitspreis} * "
-        f"({fix_element * 100:.2f}% + "
-        f"{Erdgas_Industrie * 100:.2f}% * gas_index / {gas_index_0} + "
-        f"{marktelement * 100:.2f}% * waermepreis_index / {waermepreis_index_0} + "
-        f"{Erdgas_Börse * 100:.2f}% * gas_index2 / {gas_index2_0})"
+        f"({fix_element * 100:.2f} % + "
+        f"{Erdgas_Industrie * 100:.2f} % * Erdgas (Abgabe an Industrie) / {gas_index_0} + "
+        f"{marktelement * 100:.2f} % * Wärmepreisindex / {waermepreis_index_0} + "
+        f"{Erdgas_Börse * 100:.2f} % * Erdgas (Börse) / {gas_index2_0})"
     )
 
     # Display the formula with formatting
-    st.markdown("## Formula")
+    st.markdown("## Preisformel")
     st.code(formula, language='python')
 
     # Render the plot
