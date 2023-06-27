@@ -137,6 +137,14 @@ if not error_message:
 if error_message:
     st.error(error_message)
 else:
-    st.plotly_chart(fig, use_container_width=True)
+    # Generate the formula string
+    formula = f"Arbeitspreis_neu = {basis_arbeitspreis} * ({fix_element} + " \
+              f"{Fraction(Erdgas_Industrie).limit_denominator()} * gas_index / {gas_index_0} + " \
+              f"{Fraction(marktelement).limit_denominator()} * waermepreis_index / {waermepreis_index_0} + " \
+              f"{Fraction(Erdgas_Börse).limit_denominator()} * gas_index2 / {gas_index2_0})"
+
+    # Display the formula with formatting
+    st.markdown("## Formula")
+    st.code(formula, language='python')
 
 
