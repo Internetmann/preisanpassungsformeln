@@ -32,7 +32,7 @@ st.markdown("Testen Sie mit diesem Tool verschiedene Preisformeln und Ihre Auswi
 col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
-    basis_arbeitspreis = st.number_input('Basis-Arbeitspreis (€/MWh)', min_value=20.0, max_value=200.0, step=0.01, value=50)
+    basis_arbeitspreis = st.number_input('Basis-Arbeitspreis (€/MWh)', min_value=20.0, max_value=200.0, step=0.01, value=50.0)
 
 with col2:
     fix_element = st.number_input('Fix-Element', min_value=0.0, max_value=1.0, step=0.01, value=0.2)
